@@ -7,11 +7,9 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemText,
   useTheme,
   useMediaQuery,
   styled,
-  ListItemButton,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Button } from "../Button";

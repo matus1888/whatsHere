@@ -3,10 +3,13 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { ProfileIcon } from "./ProfileIcon";
 import { Box } from "@mui/material";
+import { logout } from "./api";
+import { useNavigate } from "react-router";
 
 export function ProfileMenuButton() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -14,7 +17,13 @@ export function ProfileMenuButton() {
     setAnchorEl(null);
   };
 
-
+  const handleLogout = async () => {
+    const res = await logout();
+    if (res.success) {
+      handleClose();
+      navigate("/home");
+    }
+  };
 
   return (
     <div>
@@ -39,7 +48,7 @@ export function ProfileMenuButton() {
         }}
       >
         <MenuItem onClick={handleClose}>Профиль</MenuItem>
-        <MenuItem onClick={handleClose}>Выйти из аккаунта</MenuItem>
+        <MenuItem onClick={handleLogout}>Выйти из аккаунта</MenuItem>
       </Menu>
     </div>
   );

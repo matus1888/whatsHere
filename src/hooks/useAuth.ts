@@ -2,8 +2,9 @@ import { isTMA, retrieveLaunchParams } from "@telegram-apps/sdk-react";
 import { api } from "../shared";
 
 export const useAuth = () => {
+  const isAvailable = isTMA();
   const authViaTMA = async () => {
-    if (!isTMA()) {
+    if (!isAvailable) {
       throw new Error("no TMA");
     }
 
@@ -13,5 +14,5 @@ export const useAuth = () => {
     return response.data;
   };
 
-  return authViaTMA;
+  return { isAvailable, authViaTMA };
 };

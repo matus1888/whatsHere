@@ -1,4 +1,12 @@
-import { TextField, Button, Typography, Link, Stack } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Typography,
+  Link,
+  Stack,
+  CircularProgress,
+  Paper,
+} from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import { useAuth } from "../../hooks";
 import { useEffect, useState } from "react";
@@ -12,8 +20,9 @@ const initialValues = {
 };
 
 export const Login = () => {
-  const authViaTMA = useAuth();
+  const { authViaTMA, isAvailable } = useAuth();
   const navigate = useNavigate();
+  const [isAutoLogged, setIsAutoLogged] = useState(false);
 
   const handleSubmit = async (values: typeof initialValues) => {
     await api.post("/auth/bot", { code: values.code });
@@ -21,17 +30,33 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    authViaTMA()
-      .then((res) => {
-        console.log("res = ", res);
-        navigate("/home");
-      })
-      .catch((e) => {
-        if (e instanceof Error) {
-          console.log(e.message);
-        }
-      });
-  }, [authViaTMA, navigate]);
+    if (isAvailable) {
+      setIsAutoLogged(true);
+      authViaTMA()
+        .then((res) => {
+          console.log("res = ", res);
+          navigate("/home");
+        })
+        .catch((e) => {
+          if (e instanceof Error) {
+            console.log(e.message);
+          }
+        });
+    }
+  }, [authViaTMA, navigate, isAvailable]);
+
+  if (isAutoLogged) {
+    return (
+      <Paper sx={{ height: "100vh", width: "100vw" }}>
+        <Stack justifyContent="center" alignItems="center" gap={3}>
+          <Typography variant="body2" mt="30vh">
+            Идёт авторизация через Telegram
+          </Typography>
+          <CircularProgress />
+        </Stack>
+      </Paper>
+    );
+  }
 
   return (
     <Stack
@@ -45,7 +70,10 @@ export const Login = () => {
       }}
     >
       <Typography variant="h4" component="h1" gutterBottom>
-        Поиск работы
+        Кто здесь?
+      </Typography>
+      <Typography variant="body2" component="h5" gutterBottom>
+        Сервис сбора статистики заинтересованности работодателей
       </Typography>
 
       <Formik
@@ -53,7 +81,7 @@ export const Login = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched, isSubmitting, values }) => (
+        {({ errors, touched }) => (
           <Form>
             <Field name="code">
               {({ field }) => (
@@ -77,7 +105,7 @@ export const Login = () => {
               color="primary"
               fullWidth
               sx={{ mt: 2 }}
-              disabled={errors.code}
+              disabled={Boolean(errors.code)}
             >
               Авторизоваться через Telegram
             </Button>
@@ -122,23 +150,3 @@ export const Login = () => {
     </Stack>
   );
 };
-
-// import { useEffect } from "react";
-// import { authoriseMe } from "./tools";
-// import { Button } from "../Button";
-// import { useNavigate } from "react-router";
-//
-// export const Login = () => {
-//   const data = window.Telegram?.WebApp?.initData;
-//   const navigate = useNavigate();
-//   useEffect(() => {
-//     if (data) {
-//       authoriseMe(data);
-//     }
-//   });
-//   return data ? (
-//     <div>hello login page</div>
-//   ) : (
-//     <Button onClick={() => navigate("/")} title="click" />
-//   );
-// };
