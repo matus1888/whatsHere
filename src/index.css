@@ -1,0 +1,85 @@
+/* Global reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  caret-color: transparent;
+  font-family: hh sans;
+}
+
+/* App layout */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: black;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Optional: fixed height for header */
+  height: 72px;
+}
+
+main {
+  flex: 1;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+  /* Ensures content doesn't get hidden behind sticky footer */
+  margin-bottom: 60px; /* Should match footer height */
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  background-color: none;
+  margin: 0 1rem 1rem 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+/* Desktop adaptations */
+@media (min-width: 768px) {
+  /* header { */
+  /*   padding: 1rem 2rem; */
+  /* } */
+
+  main {
+    padding: 0 12rem;
+    /* Optional: max-width for better readability on desktop */
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    width: 100%;
+  }
+
+  /* footer { */
+  /*   padding: 1rem 2rem; */
+  /*   justify-content: flex-end; */
+  /*   gap: 1rem; */
+  /* } */
+
+  /* If you want footer actions to be on the right side on desktop */
+  footer {
+    margin: 0 4rem 4rem 0;
+  }
+  footer .actions {
+    margin-left: auto;
+  }
+}
