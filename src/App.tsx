@@ -6,14 +6,13 @@ import { isTmaLaunched } from "./main";
 import { Visits } from "./shared";
 
 export function App() {
-  console.log("render");
-
   if (isTmaLaunched) {
     return <WithTma />;
   } else {
     return <WithoutTma />;
   }
 }
+
 function WithoutTma() {
   return (
     <BrowserRouter>

@@ -12,9 +12,9 @@ import {
   styled,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Button } from "../Button";
 import { ListItemNav, NavigationItems } from "./components";
 import { useNavigate } from "react-router";
+import { Button } from "../ui";
 
 interface HeaderProps {
   logo: React.ReactNode;
@@ -152,7 +152,7 @@ export const Header: React.FC<HeaderProps> = ({
           {!isMobile && (
             <RightBlock>
               <div>{messagerBtn}</div>
-              <Button variant="contained">{buttonTitle}</Button>
+              <Button variant="contained" color="primary">{buttonTitle}</Button>
               <div>{profileButton}</div>
             </RightBlock>
           )}
