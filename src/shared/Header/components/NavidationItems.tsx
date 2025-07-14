@@ -5,24 +5,32 @@ interface NavaigationItemProps {
   index: number;
   item: React.ReactNode;
 }
+
+function handleNavIndex(
+  index: number,
+  navigate: ReturnType<typeof useNavigate>,
+) {
+  switch (index) {
+    case 0:
+      return navigate("/resume");
+    case 1:
+      return navigate("/visits");
+    case 2:
+      window.location.href = "https://matus1888.github.io/clonoOf2048";
+      break;
+    case 3:
+      break;
+  }
+}
 export const NavigationItems = ({ index, item }: NavaigationItemProps) => {
   const navigate = useNavigate();
   return (
     <Box
-      onClick={() => {
-        switch (index) {
-          case 0:
-            return navigate("/resume");
-          case 1:
-            return navigate("/visits");
-          case 2:
-          case 3:
-        }
-      }}
+      onClick={() => handleNavIndex(index, navigate)}
       sx={{
         cursor: "pointer",
         ":hover": { color: "white" },
-        ...([2, 3].includes(index) && {
+        ...([3].includes(index) && {
           color: "grey",
           ":hover": { color: "grey" },
         }),
@@ -38,19 +46,8 @@ export const ListItemNav = ({ item, index }: NavaigationItemProps) => {
   const navigate = useNavigate();
   return (
     <ListItemButton
-      onClick={() => {
-        switch (index) {
-          case 0:
-            return navigate("/resume");
-          case 1:
-            return navigate("/visits");
-          case 2:
-            return navigate("/services");
-          case 3:
-            return navigate("/help");
-        }
-      }}
-      disabled={[2, 3].includes(index)}
+      onClick={() => handleNavIndex(index, navigate)}
+      disabled={[3].includes(index)}
     >
       <ListItemText>{item}</ListItemText>
     </ListItemButton>

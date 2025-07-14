@@ -25,7 +25,7 @@ export const Layout: React.FC<LayoutProps> = ({
 }) => {
   const {
     logo = <Logo />,
-    sections = ["Мои резюме", "Посещения", "Сервисы", "Помощь"],
+    sections = ["Мои резюме", "Посещения", "Сыграть", "Помощь"],
     profileButton = <ProfileMenuButton />,
   } = headerProps || {};
   const { messagerBtn = <Message /> } = footerProps || {};
