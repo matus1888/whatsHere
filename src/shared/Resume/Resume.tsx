@@ -3,6 +3,7 @@ import { Typography, Paper, Button, Chip } from "../ui";
 import { api } from "../services/axios";
 import { useEffect, useState } from "react";
 import { pluralize } from "./tool";
+import { ActualResume } from "./ActualResume";
 
 async function getResumeStatistic() {
   const res = await Promise.allSettled([
@@ -64,10 +65,7 @@ export const Resume = () => {
   return (
     <Paper>
       <Stack padding="16px" gap={2}>
-        <Typography variant="h6" sx={{ fontWeight: 500 }}>
-          Frontend Разработчик (React, TypeScript, GraphQL)
-        </Typography>
-        <Typography variant="body1" sx={{ fontWeight: 500 }}>
+        <Typography variant="h5" sx={{ fontWeight: 500 }}>
           Статистика работы ресурса
         </Typography>
         <Paper
@@ -75,10 +73,11 @@ export const Resume = () => {
         >
           <Box
             display="flex"
-            justifyContent={isMobile ? "flex-start" : "space-between"}
+            justifyContent={"space-between"}
             gap={2}
-            flexDirection={isMobile ? "column" : "row"}
+            flexDirection={"row"}
             alignItems="center"
+            fontSize={isMobile ? "14px" : "16px"}
           >
             <Box
               display="flex"
@@ -156,6 +155,10 @@ export const Resume = () => {
             Скачать
           </Button>
         </Box>
+        <Typography variant="h6" sx={{ fontWeight: 500 }}>
+          Frontend Разработчик (React, TypeScript, GraphQL)
+        </Typography>
+        <ActualResume />
       </Stack>
     </Paper>
   );

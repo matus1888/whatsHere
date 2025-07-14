@@ -49,7 +49,10 @@ export const Button = styled(MuiButton)<ButtonProps>(
         color: "#0070FF",
         border: 0,
         borderRadius: 10,
-        "&:hover": {},
+        "&:hover": {
+          boxShadow: "none",
+          backgroundColor: "#EDF0FF", // свой фон
+        },
       }),
     ...(variant === "contained" &&
       color === "success" && {
@@ -70,8 +73,8 @@ export const Button = styled(MuiButton)<ButtonProps>(
         borderRadius: "24px",
         border: "0px",
         color: "white",
-        fontSize: '16px',
-        fontFamily: 'hh sans',
+        fontSize: "16px",
+        fontFamily: "hh sans",
         backgroundColor: "black",
         display: "flex",
         justifyContent: "center",

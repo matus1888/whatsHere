@@ -185,9 +185,11 @@ export const Visits = () => {
                           timeout="auto"
                           unmountOnExit
                         >
-                          {user.visits?.map((visit) => (
-                            <CollapsedVisit key={visit.id} visit={visit} />
-                          ))}
+                          <Paper sx={{ boxShadow: "none" }}>
+                            {user.visits?.map((visit) => (
+                              <CollapsedVisit key={visit.id} visit={visit} />
+                            ))}
+                          </Paper>
                         </Collapse>
                       </Stack>
 

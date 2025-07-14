@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Divider, useMediaQuery, useTheme } from "@mui/material";
 import {
   Public as PublicIcon,
   Fingerprint as FingerprintIcon,
@@ -7,7 +7,7 @@ import {
   Link as LinkIcon,
 } from "@mui/icons-material";
 import type { Visit } from "../Visits";
-import { Chip, Paper } from "../../ui";
+import { Chip, Typography } from "../../ui";
 
 interface CollapsedVisitProps {
   visit: Visit;
@@ -17,22 +17,19 @@ export const CollapsedVisit: React.FC<CollapsedVisitProps> = ({ visit }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
-    <Paper
-      sx={{
-        margin: 1,
-      }}
-    >
+    <>
+      <Divider sx={{ my: 1 }} />
       <Box gap={1} padding={1}>
-        <Box m={0.5} alignItems="center">
-          <Chip
-            icon={<TodayIcon />}
-            size="small"
-            label={`${new Intl.DateTimeFormat("Ru-ru", {
+        <Box display="flex" gap={1} mb={1}>
+          <TodayIcon />
+          <Typography>
+            {new Intl.DateTimeFormat("Ru-ru", {
               dateStyle: isMobile ? "short" : "long",
               timeStyle: isMobile ? "short" : "long",
-            }).format(new Date(visit.visitedAt))}`}
-          />
+            }).format(new Date(visit.visitedAt))}
+          </Typography>
         </Box>
+
         <Box display="inline-flex" m={0.5} gap={2} alignItems="center">
           <Chip
             icon={<FingerprintIcon />}
@@ -57,6 +54,6 @@ export const CollapsedVisit: React.FC<CollapsedVisitProps> = ({ visit }) => {
           )}
         </Box>
       </Box>
-    </Paper>
+    </>
   );
 };
