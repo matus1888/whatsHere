@@ -150,8 +150,8 @@ export const Visits = () => {
                             label={
                               (isMobile ? "" : "Последняя авторизация: ") +
                               new Intl.DateTimeFormat("Ru-ru", {
-                                dateStyle: "long",
-                                timeStyle: "long",
+                                dateStyle: isMobile ? "short" : "long",
+                                timeStyle: isMobile ? "short" : "long",
                               }).format(new Date(user.lastLogin))
                             }
                             size="medium"

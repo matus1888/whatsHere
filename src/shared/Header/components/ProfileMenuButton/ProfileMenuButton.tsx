@@ -25,6 +25,11 @@ export function ProfileMenuButton() {
     }
   };
 
+  const handleLogin = () => {
+    handleClose();
+    navigate("/auth");
+  };
+
   return (
     <div>
       <Box
@@ -47,6 +52,7 @@ export function ProfileMenuButton() {
           },
         }}
       >
+        <MenuItem onClick={handleLogin}>Войти через Telegram</MenuItem>
         <MenuItem onClick={handleLogout}>Выйти из аккаунта</MenuItem>
       </Menu>
     </div>
