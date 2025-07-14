@@ -1,10 +1,9 @@
 import axios from "axios";
 
-export const BASE_URL = "https://sandbox.matus.netcraze.club";
 export let WITH_CRED: boolean | undefined;
 
 export const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: import.meta.env.VITE_PROXY,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",

@@ -9,4 +9,14 @@ export default defineConfig({
     assetsDir: "./whatsHere/assets",
   },
   plugins: [react(), mkcert()],
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://sandbox.matus.netcraze.club",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+        cookieDomainRewrite: "127.0.0.1",
+      },
+    },
+  },
 });
