@@ -1,7 +1,7 @@
 import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { ProfileIcon } from "./ProfileIcon";
+import { ProfileIcon } from "../../../ui/Icons";
 import { Box } from "@mui/material";
 import { logout } from "./api";
 import { useNavigate } from "react-router";
@@ -47,7 +47,6 @@ export function ProfileMenuButton() {
           },
         }}
       >
-        <MenuItem onClick={handleClose}>Профиль</MenuItem>
         <MenuItem onClick={handleLogout}>Выйти из аккаунта</MenuItem>
       </Menu>
     </div>

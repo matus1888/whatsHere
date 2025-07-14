@@ -16,12 +16,17 @@ export const NavigationItems = ({ index, item }: NavaigationItemProps) => {
           case 1:
             return navigate("/visits");
           case 2:
-            return navigate("/services");
           case 3:
-            return navigate("/help");
         }
       }}
-      sx={{ cursor: "pointer", ":hover": { color: "white" } }}
+      sx={{
+        cursor: "pointer",
+        ":hover": { color: "white" },
+        ...([2, 3].includes(index) && {
+          color: "grey",
+          ":hover": { color: "grey" },
+        }),
+      }}
       key={String(item)}
     >
       {item}
@@ -45,6 +50,7 @@ export const ListItemNav = ({ item, index }: NavaigationItemProps) => {
             return navigate("/help");
         }
       }}
+      disabled={[2, 3].includes(index)}
     >
       <ListItemText>{item}</ListItemText>
     </ListItemButton>

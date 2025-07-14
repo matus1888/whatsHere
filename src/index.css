@@ -36,7 +36,7 @@ header {
 main {
   flex: 1;
   justify-content: center;
-  padding: 1rem;
+  padding: 2rem;
   overflow-y: auto;
   /* Ensures content doesn't get hidden behind sticky footer */
   margin-bottom: 60px; /* Should match footer height */
@@ -63,7 +63,7 @@ footer {
   /* } */
 
   main {
-    padding: 0 12rem;
+    padding: 2rem 12rem;
     /* Optional: max-width for better readability on desktop */
     max-width: 1200px;
     margin: 0 auto 60px;

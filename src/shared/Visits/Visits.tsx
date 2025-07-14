@@ -9,6 +9,8 @@ import {
   Link,
   IconButton,
   Collapse,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { ExpandLess, ExpandMore, People, Work } from "@mui/icons-material";
 import { api } from "../services/axios";
@@ -44,6 +46,8 @@ export interface User {
 export const Visits = () => {
   // Предзагруженные данные
   const [users, setUsers] = useState<User[]>([]);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [expanded, setExpanded] = useState<Record<number, boolean>>({});
 
   const toggleExpand = (key: number) => {
@@ -68,7 +72,7 @@ export const Visits = () => {
     <Paper elevation={0} sx={{ p: 2, bgcolor: "background.paper" }}>
       <Stack gap="20px">
         {users.length ? (
-          users.map((user) => (
+          users.map((user) => user.telegramUsername === "matus1888" ? null : (
             <React.Fragment key={user.id}>
               <Card>
                 <CardContent>
@@ -78,9 +82,13 @@ export const Visits = () => {
                   >
                     <Box
                       display="grid"
-                      gridTemplateAreas="'a b' 'a c'"
+                      gridTemplateAreas={
+                        isMobile ? "'a' 'b' 'c'" : "'a b' 'a c'"
+                      }
                       gap={3}
-                      gridTemplateColumns="max-content auto"
+                      gridTemplateColumns={
+                        isMobile ? "auto" : "max-content auto"
+                      }
                     >
                       <Avatar
                         src={bufferToUrl(user.telegramPhoto)}
@@ -95,8 +103,7 @@ export const Visits = () => {
                         {user.firstName[0]}
                       </Avatar>
                       <Box display="flex" gap={1} alignItems="center">
-                        <People color="action" fontSize="large" />
-                        <Typography variant="h6" component="h2">
+                        <Typography variant="h4" component="h2">
                           @{user.telegramUsername}
                         </Typography>
                       </Box>
@@ -109,7 +116,24 @@ export const Visits = () => {
                         </Typography>
                       </Box>
                     </Box>
-                    <Box pt={1} display="flex" gap={2}>
+                    <Box
+                      pt={1}
+                      display="flex"
+                      gap={2}
+                      flexDirection={isMobile ? "column" : "row"}
+                    >
+                      {user.visits.some(({ ipAddress }) => !!ipAddress) && (
+                        <Box>
+                          <Chip
+                            icon={
+                              <Box style={{ color: "#0070FF" }}>
+                                <Checkeed />
+                              </Box>
+                            }
+                            label={`IP адрес: ${user.visits.find(({ ipAddress }) => !!ipAddress)?.ipAddress}`}
+                          />
+                        </Box>
+                      )}
                       {user.visits.length != null && (
                         <Box>
                           <Chip
@@ -117,23 +141,13 @@ export const Visits = () => {
                           />
                         </Box>
                       )}
-                      {user.visits.some(({ ipAddress }) => !!ipAddress) && (
-                        <Chip
-                          icon={
-                            <Box style={{ color: "#0070FF" }}>
-                              <Checkeed />
-                            </Box>
-                          }
-                          label={`IP адрес: ${user.visits.find(({ ipAddress }) => !!ipAddress)?.ipAddress}`}
-                        />
-                      )}
                     </Box>
                     {user.lastLogin && (
                       <Box>
                         <Chip
                           icon={<Work fontSize="small" />}
                           label={
-                            "Последняя авторизация: " +
+                            (isMobile ? "" : "Последняя авторизация: ") +
                             new Intl.DateTimeFormat("Ru-ru", {
                               dateStyle: "long",
                               timeStyle: "long",
@@ -145,11 +159,14 @@ export const Visits = () => {
                       </Box>
                     )}
                     {!!user.visits?.length && (
-                      <Box display="flex" gap={1} alignItems="center">
-                        <IconButton
-                          size="small"
-                          onClick={() => toggleExpand(user.id)}
-                        >
+                      <Box
+                        onClick={() => toggleExpand(user.id)}
+                        display="flex"
+                        sx={{ cursor: "pointer" }}
+                        gap={1}
+                        alignItems="center"
+                      >
+                        <IconButton size="small">
                           {expanded[user.id] ? <ExpandLess /> : <ExpandMore />}
                         </IconButton>
                         <Typography variant="body2" component="h2">

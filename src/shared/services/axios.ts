@@ -47,7 +47,7 @@ async function getUserIP() {
 const interval = setInterval(async () => {
   if (WITH_CRED) {
     const ipAddress = await getUserIP();
-    api.post("/Visit", { ipAddress });
+    api.post("/Visit", { ipAddress, source: sessionStorage.getItem('source') });
     clearInterval(interval);
   }
 }, 3000);

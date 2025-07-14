@@ -63,6 +63,21 @@ export const Button = styled(MuiButton)<ButtonProps>(
           boxShadow: "none",
         },
       }),
+    // Стили кнока а-ля Чаты
+    ...(variant === "contained" &&
+      color === "info" && {
+        height: "49px",
+        borderRadius: "24px",
+        border: "0px",
+        color: "white",
+        fontSize: '16px',
+        fontFamily: 'hh sans',
+        backgroundColor: "black",
+        display: "flex",
+        justifyContent: "center",
+        gap: "8px",
+        alignItems: "center",
+      }),
 
     // Стили для outlined варианта
     ...(variant === "outlined" && {

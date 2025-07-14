@@ -10,6 +10,7 @@ import {
   useTheme,
   useMediaQuery,
   styled,
+  Link,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { ListItemNav, NavigationItems } from "./components";
@@ -21,7 +22,7 @@ interface HeaderProps {
   sections: React.ReactNode[];
   messagerBtn: React.ReactNode;
   profileButton: React.ReactNode;
-  buttonTitle: string;
+  rigthBtn?: React.ReactNode;
 }
 
 const HeaderContainer = styled(Box)(({ theme }) => ({
@@ -84,21 +85,43 @@ export const Header: React.FC<HeaderProps> = ({
   sections,
   messagerBtn,
   profileButton,
-  buttonTitle,
+  rigthBtn = (
+    <Button
+      variant="contained"
+      onClick={() => (window.location.href = "https://github.com/matus1888")}
+      fullWidth
+    >
+      На Github
+    </Button>
+  ),
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
+
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const DRAWER_WIDTH = "80vw";
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const messager = (
+    <Link
+      target="_blank"
+      href="https://t.me/matus1888"
+      sx={{ cursor: "pointer", color: "currentcolor" }}
+    >
+      {messagerBtn}
+    </Link>
+  );
+
   const drawer = (
     <Box
       sx={{
-        width: 250,
+        width: DRAWER_WIDTH,
+        padding: 3,
       }}
       role="presentation"
       onClick={handleDrawerToggle}
@@ -108,9 +131,7 @@ export const Header: React.FC<HeaderProps> = ({
         {sections.map((text, index) => (
           <ListItemNav item={text} index={index} key={String(text)} />
         ))}
-        <ListItem>
-          <Button fullWidth>{buttonTitle}</Button>
-        </ListItem>
+        <ListItem>{rigthBtn}</ListItem>
       </List>
     </Box>
   );
@@ -136,7 +157,7 @@ export const Header: React.FC<HeaderProps> = ({
               ))}
             </SectionsWrapper>
             <Box display="flex" alignItems="center" gap="16px">
-              {isMobile && <div>{messagerBtn}</div>}
+              {isMobile && messager}
               <MobileMenuButton
                 color="inherit"
                 aria-label="open drawer"
@@ -151,9 +172,9 @@ export const Header: React.FC<HeaderProps> = ({
 
           {!isMobile && (
             <RightBlock>
-              <div>{messagerBtn}</div>
-              <Button variant="contained" color="primary">{buttonTitle}</Button>
-              <div>{profileButton}</div>
+              {messager}
+              {rigthBtn}
+              {profileButton}
             </RightBlock>
           )}
         </HeaderContainer>
@@ -170,8 +191,8 @@ export const Header: React.FC<HeaderProps> = ({
           sx: {
             alignItems: "center",
             position: "fixed",
-            left: "20%",
-            maxWidth: "65%",
+            left: `calc((100vw - ${DRAWER_WIDTH})/2)`,
+            width: "max-content",
             backgroundColor: "#f5f5f5",
             borderRadius: "16px 16px 0 0",
             boxShadow: "4px 0 10px rgba(0,0,0,0.1)",
