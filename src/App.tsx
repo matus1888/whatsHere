@@ -6,8 +6,9 @@ import { Layout } from "./shared/Layout";
 import { Home } from "./shared/Home/Home";
 
 export function App() {
+  //TO prod
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={"/whatsHere"}>
       <Routes>
         <Route path="/home" element={<Layout main={<Home />} />} />
         <Route path="/auth" element={<Login />} />

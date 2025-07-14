@@ -114,6 +114,7 @@ export const Login = () => {
         )}
       </Formik>
 
+      {/*
       <Typography variant="body2" textAlign="center" sx={{ mt: 2 }}>
         или
       </Typography>
@@ -123,7 +124,7 @@ export const Login = () => {
           Войти в Telegram Mini App
         </Button>
       </Link>
-
+        */}
       <Typography
         variant="caption"
         display="block"

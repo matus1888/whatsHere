@@ -7,6 +7,8 @@ import { techIcons } from "./constants";
 export const Home = () => {
   useSource();
   const navigate = useNavigate();
+  //@ts-ignore
+  window.goTo = navigate;
 
   return (
     <>

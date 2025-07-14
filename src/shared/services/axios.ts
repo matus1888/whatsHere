@@ -26,7 +26,9 @@ api.interceptors.response.use(
 
     // Если ошибка 401 (токен истек) и это не запрос на /refresh
     if (error.response?.status === 401 && !originalRequest._retry) {
-      window.location.href = "/auth";
+      //@ts-ignore
+      window.goTo?.("/auth");
+      // window.location.href = "/whatsHere/auth";
       //TODO refresh logic
     }
 
@@ -47,7 +49,7 @@ async function getUserIP() {
 const interval = setInterval(async () => {
   if (WITH_CRED) {
     const ipAddress = await getUserIP();
-    api.post("/Visit", { ipAddress, source: sessionStorage.getItem('source') });
+    api.post("/Visit", { ipAddress, source: sessionStorage.getItem("source") });
     clearInterval(interval);
   }
 }, 3000);
