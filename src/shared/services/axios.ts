@@ -53,4 +53,4 @@ const interval = setInterval(async () => {
 }, 3000);
 
 //TODO delete me
-window.api = api;
+// window.api = api;

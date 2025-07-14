@@ -84,6 +84,7 @@ export const Login = () => {
         {({ errors, touched }) => (
           <Form>
             <Field name="code">
+              {/*@ts-ignore */}
               {({ field }) => (
                 <TextField
                   {...field}

@@ -7,7 +7,8 @@
     "dev": "vite --host=127.0.0.1",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pages": "node ./scripts/gh-page.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
