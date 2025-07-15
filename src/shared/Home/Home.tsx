@@ -16,7 +16,7 @@ export const Home = () => {
         <Stack padding="16px" gap={2}>
           <Box display="flex" gap={1}>
             <Logo />
-            <Typography variant="h4">Whats here?</Typography>
+            <Typography variant="h4">Who's here?</Typography>
           </Box>
           <Paper>
             <Typography variant="body1" padding={1}>

@@ -75,7 +75,7 @@ export const Resume = () => {
             display="flex"
             justifyContent={"space-between"}
             gap={2}
-            flexDirection={"row"}
+            flexDirection={isMobile ? "column-reverse" : "row"}
             alignItems="center"
             fontSize={isMobile ? "14px" : "16px"}
           >
