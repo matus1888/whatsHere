@@ -6,9 +6,10 @@ import { Layout } from "./shared/Layout";
 import { Home } from "./shared/Home/Home";
 
 export function App() {
-  //TO prod
+  const isDev = import.meta.env.DEV;
+
   return (
-    <Router basename={"/whatsHere"}>
+    <Router basename={isDev ? undefined : "/whatsHere"}>
       <Routes>
         <Route path="/home" element={<Layout main={<Home />} />} />
         <Route path="/auth" element={<Login />} />

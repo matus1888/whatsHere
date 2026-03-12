@@ -18,13 +18,15 @@ async function getResumeStatistic() {
     return item.status === "fulfilled" ? item.value.data.count : 0;
   });
 
+  const [usersCount, visitsCount, resumeCount, hhCount, habrCount, tlgCount] =
+    data;
   return {
-    usersCount: data[0],
-    visitsCount: data[1],
-    resumeCount: data[2],
-    hhCount: data[3],
-    habrCount: data[4],
-    tlgCount: data[5],
+    usersCount,
+    visitsCount,
+    resumeCount,
+    hhCount,
+    habrCount,
+    tlgCount,
   };
 }
 

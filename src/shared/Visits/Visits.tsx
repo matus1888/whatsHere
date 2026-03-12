@@ -73,7 +73,7 @@ export const Visits = () => {
       <Stack gap="20px">
         {users.length ? (
           users.map((user) =>
-            user.telegramUsername === "matus1888" ? null : (
+            user.telegramUsername === import.meta.env.VITE_MY_TG ? null : (
               <React.Fragment key={user.id}>
                 <Card>
                   <CardContent>

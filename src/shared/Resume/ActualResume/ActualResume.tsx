@@ -18,6 +18,7 @@ const Chip = styled(BaseChip)(() => ({
   marginTop: "6px",
 }));
 
+//TODO replace это должно перекомпилироваться на основе нового загрженного pdf, по дефолту Pdf должен всё таки лежать на сайте
 export const ActualResume = () => {
   return (
     <>
@@ -42,11 +43,11 @@ export const ActualResume = () => {
         <Grid container sx={{ spacing: 2, mt: 1 }}>
           <Grid sx={{ xs: 12, md: 6 }}>
             <Typography>
-              <strong>Контакты:</strong> +7 (965) 4748370 • telegram: @matus1888
+              <strong>Контакты:</strong> {import.meta.env.VITE_MY_PHONE} • telegram: {import.meta.env.VITE_MY_TG}
             </Typography>
             <Typography>
               <strong>Email:</strong>{" "}
-              <Link href="mailto:matus1888@gmail.com">matus1888@gmail.com</Link>
+              <Link href={`mailto:${import.meta.env.VITE_MY_POST}`}>{import.meta.env.VITE_MY_POST}</Link>
             </Typography>
           </Grid>
           <Grid sx={{ xs: 12, md: 6 }}>
@@ -103,8 +104,8 @@ export const ActualResume = () => {
         <Box mt={1}>
           <Typography variant="body2" component="h3">
             <strong>
-              JS/TS Разработчик (frontend, backend) - Система национальной
-              маркировки товаров "Честный ЗНАК"
+              JS/TS Разработчик (frontend, backend) - Система национальной маркировки товаров
+              "Честный ЗНАК"
             </strong>
           </Typography>
           <Typography color="text.secondary" gutterBottom>
@@ -222,44 +223,28 @@ export const ActualResume = () => {
           Навыки
         </Typography>
         <Grid container spacing={1}>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="JavaScript" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="TypeScript" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="React" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="GraphQL" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="Next.js" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="Redux" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="Material-UI" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="Git" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="Nest.js" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="Jest" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="SSR" color="primary" sx={{ width: "100%" }} />
-          </Grid>
-          <Grid sx={{ xs: 6, sm: 4, md: 3 }}>
-            <Chip label="REST API" color="primary" sx={{ width: "100%" }} />
-          </Grid>
+          {data.map((item) => (
+            <Grid key={item} sx={{ xs: 6, sm: 4, md: 3 }}>
+              <Chip label={item} color="primary" sx={{ width: "100%" }} />{" "}
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </>
   );
 };
+
+const data = [
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "GraphQL",
+  "Next.js",
+  "Redux",
+  "Material-UI",
+  "Git",
+  "Nest.js",
+  "Jest",
+  "SSR",
+  "REST API",
+];

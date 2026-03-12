@@ -110,7 +110,7 @@ export const Header: React.FC<HeaderProps> = ({
   const messager = (
     <Link
       target="_blank"
-      href="https://t.me/matus1888"
+      href={`https://t.me/${import.meta.env.VITE_MY_TG}`}
       sx={{ cursor: "pointer", color: "currentcolor" }}
     >
       {messagerBtn}

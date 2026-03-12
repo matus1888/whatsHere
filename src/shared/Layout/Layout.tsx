@@ -41,7 +41,7 @@ export const Layout: React.FC<LayoutProps> = ({
       <footer>
         <Link
           target="_blank"
-          href="https://t.me/matus1888"
+          href={`https://t.me/${import.meta.env.VITE_MY_TG}`}
           sx={{textDecoration: "none"}}
         >
           <Button
