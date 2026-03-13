@@ -6,28 +6,9 @@ import { pluralize } from "./tool";
 import { ActualResume } from "./ActualResume";
 
 async function getResumeStatistic() {
-  const res = await Promise.allSettled([
-    api.get<{ count: number }>("/users/count"),
-    api.get<{ count: number }>("/visit/count"),
-    api.get<{ count: number }>("/resume/count"),
-    api.get<{ count: number }>("/visit/hhCount"),
-    api.get<{ count: number }>("/visit/habrCount"),
-    api.get<{ count: number }>("/visit/tlgCount"),
-  ]);
-  const data = res.map((item) => {
-    return item.status === "fulfilled" ? item.value.data.count : 0;
-  });
+  const { data } = await api.get<Record<string, number>>("/statistics");
 
-  const [usersCount, visitsCount, resumeCount, hhCount, habrCount, tlgCount] =
-    data;
-  return {
-    usersCount,
-    visitsCount,
-    resumeCount,
-    hhCount,
-    habrCount,
-    tlgCount,
-  };
+  return data;
 }
 
 const loadResumeHandler = async () => {
@@ -51,8 +32,8 @@ export const Resume = () => {
 
   const [counts, setCounts] = useState<{
     usersCount?: number;
-    visitsCount?: number;
-    resumeCount?: number;
+    allVisit?: number;
+    downloads?: number;
     hhCount?: number;
     habrCount?: number;
     tlgCount?: number;
@@ -107,9 +88,9 @@ export const Resume = () => {
             >
               <Divider orientation="vertical" />
               <Typography fontWeight={600}>
-                {counts.visitsCount ?? "..."}
+                {counts.allVisit ?? "..."}
               </Typography>
-              {pluralize(counts.visitsCount || 0, [
+              {pluralize(counts.allVisit || 0, [
                 "посещение",
                 "посещения",
                 "посещений",
@@ -125,9 +106,9 @@ export const Resume = () => {
             >
               <Typography fontWeight={600}>
                 {" "}
-                {counts.resumeCount ?? "..."}
+                {counts.downloads ?? "..."}
               </Typography>
-              {pluralize(counts.resumeCount || 0, [
+              {pluralize(counts.allVisit || 0, [
                 "скачивание",
                 "скачивания",
                 "скачиваний",
