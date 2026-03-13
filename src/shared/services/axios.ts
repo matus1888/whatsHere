@@ -3,7 +3,7 @@ import axios from "axios";
 export let WITH_CRED: boolean | undefined;
 
 export const api = axios.create({
-  baseURL: import.meta.env.DEV ? '/proxy': import.meta.env.VITE_PROXY,
+  baseURL: import.meta.env.DEV ? "/proxy" : import.meta.env.VITE_PROXY,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -21,10 +21,8 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const originalRequest = error.config;
-
     // Если ошибка 401 (токен истек) и это не запрос на /refresh
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401) {
       //@ts-ignore
       window.goTo?.("/auth");
       // window.location.href = "/whatsHere/auth";
@@ -32,7 +30,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  },
+  }
 );
 async function getUserIP() {
   try {
