@@ -7,9 +7,10 @@ import { Home } from "./shared/Home/Home";
 
 export function App() {
   const isDev = import.meta.env.DEV;
+  console.log("isDev = ", isDev);
 
   return (
-    <Router basename={isDev ? undefined : "/whatsHere"}>
+    <Router>
       <Routes>
         <Route path="/home" element={<Layout main={<Home />} />} />
         <Route path="/auth" element={<Login />} />

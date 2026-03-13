@@ -5,6 +5,7 @@ interface ImportMetaEnv {
   readonly VITE_MY_POST: string;
   readonly VITE_MY_TG: string;
   readonly VITE_MY_PHONE: string;
+  readonly DEV: string; 
   // добавьте другие переменные...
 }
 

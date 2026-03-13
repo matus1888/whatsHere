@@ -11,6 +11,7 @@ import {
   Collapse,
   useMediaQuery,
   useTheme,
+  Pagination,
 } from "@mui/material";
 import { ExpandLess, ExpandMore, Work } from "@mui/icons-material";
 import { api } from "../services/axios";
@@ -206,7 +207,7 @@ export const Visits = () => {
                   </CardContent>
                 </Card>
               </React.Fragment>
-            ),
+            )
           )
         ) : (
           <Box
@@ -222,6 +223,11 @@ export const Visits = () => {
             <CircularProgress />
           </Box>
         )}
+        <Pagination
+          count={3}
+          page={1}
+          onChange={(...args) => console.log(args)}
+        />
       </Stack>
     </Paper>
   );
