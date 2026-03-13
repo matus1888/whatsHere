@@ -3,7 +3,7 @@ import axios from "axios";
 export let WITH_CRED: boolean | undefined;
 
 export const api = axios.create({
-  baseURL: '/proxy',
+  baseURL: import.meta.env.DEV ? '/proxy': import.meta.env.VITE_PROXY,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",

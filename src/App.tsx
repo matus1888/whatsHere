@@ -6,9 +6,6 @@ import { Layout } from "./shared/Layout";
 import { Home } from "./shared/Home/Home";
 
 export function App() {
-  const isDev = import.meta.env.DEV;
-  console.log("isDev = ", isDev);
-
   return (
     <Router>
       <Routes>
